@@ -22,7 +22,7 @@ int	ft_atoi(const char *nptr, int *n)
 		if((result > 2147483647 && sign == 1) || (result > 2147483648 && sign == -1) )
 			return (1);
 	}
-	if ((*nptr && !(*nptr >= '0' && *nptr <= '9')) && *nptr !=' ' )
+	if ((*nptr && !(*nptr >= '0' && *nptr <= '9')))
 		return (1);
 	*n = result * sign;
 	return (0);

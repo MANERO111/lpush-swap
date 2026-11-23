@@ -2,8 +2,8 @@
 
 void	ft_error(t_stack *a , char **str)
 {
-	if(a)
-		free_stack(a);
+	if(a && a->top)
+		free_stack(a->top);
 	free_split(str);
 	ft_putstr_fd("Error\n", 2);
 	exit(1);
@@ -24,7 +24,7 @@ void	free_split(char **str)
 	free(str);
 }
 
-int checkdbl(t_stack *cur , int n)
+int checkdbl(t_node *cur , int n)
 {
 	if (!cur)
 		return (0);
@@ -37,14 +37,14 @@ int checkdbl(t_stack *cur , int n)
 	return (0);
 }
 
-int ft_validate(t_stack **a, char *str )
+int ft_validate(t_stack *a, char *str )
 {
 	int value ;
-	t_stack *new;
+	t_node *new;
 
 	if (ft_atoi(str, &value))
 		return (0);
-	if (checkdbl(*a,value))
+	if (checkdbl(a->top,value))
 		return (0);
 	new = ft_lstnew(value);
 	if (!new)
@@ -85,13 +85,12 @@ int check_flag(char *str , t_info *info)
 	return (0);
 }
 
-void	parser(char **av, int ac ,t_stack **a, t_info *info)
+void	parser(char **av, int ac ,t_stack *a, t_info *info)
 {
 	char **s;
 	int i ;
 	int j ;
 
-	*a = NULL;
 	i = 1;
 	if(check_flag(av[1],info))
 		i++;
@@ -100,11 +99,11 @@ void	parser(char **av, int ac ,t_stack **a, t_info *info)
 		s = ft_split(av[i], ' ');
 
 		if(!s || *s == NULL)
-			ft_error(*a, s);
+			ft_error(a, s);
 		j = 0;
 		while (s[j])
 			if(!ft_validate(a, s[j++]))
-				ft_error(*a, s);
+				ft_error(a, s);
 		free_split(s);
 		i++;
 	}

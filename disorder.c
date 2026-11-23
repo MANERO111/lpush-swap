@@ -1,29 +1,31 @@
 #include "push.h"
 
 
-void	ft_index_stack(t_stack *a)
+void	ft_index_stack(t_node *a)
 {
-	t_stack	*comp;
+	t_node	*comp;
+	t_node	*cur;
 	int		idx;
 
-	while (a)
+	cur = a;
+	while (cur)
 	{
 		idx = 0;
 		comp = a;
 		while (comp)
 		{
-			if (comp->value < a->value)
+			if (comp->value < cur->value)
 				idx++;
 			comp = comp->next;
 		}
-		a->index = idx;
-		a = a->next;
+		cur->index = idx;
+		cur = cur->next;
 	}
 }
 
-double ft_disorder(t_stack *a)
+double ft_disorder(t_node *a)
 {
-	t_stack *cur;
+	t_node *cur;
 	long mistakes;
 	long total_pairs;
 	

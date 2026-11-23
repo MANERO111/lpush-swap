@@ -1,10 +1,10 @@
 #include "push.h"
 
-t_stack	*ft_lstnew(int value)
+t_node	*ft_lstnew(int value)
 {
-	t_stack	*ptr ;
+	t_node	*ptr ;
 
-	ptr = malloc(sizeof(t_stack));
+	ptr = malloc(sizeof(t_node));
 	if (!ptr)
 		return (NULL);
 	ptr->value = value;
@@ -13,40 +13,43 @@ t_stack	*ft_lstnew(int value)
 	return (ptr);
 }
 
-void	ft_lstadd_back(t_stack **lst, t_stack *new)
+void    ft_lstadd_back(t_stack *lst, t_node *new)
 {
-	t_stack	*last;
-
-	if (!lst || !new)
-		return ;
-	if (*lst == NULL)
-	{
-		*lst = new;
-		return ;
-	}
-	last = *lst;
-	while (last->next)
-		last = last->next;
-	last->next = new;
-	new->prev = last;
+    if (!lst || !new)
+        return ;
+    if (lst->top == NULL)
+    {
+        lst->top = new;
+        lst->bottom = new;
+    }
+    else
+    {
+        lst->bottom->next = new;
+        new->prev = lst->bottom;
+        lst->bottom = new;
+    }
+    lst->size++;
 }
 
 size_t	size_of_stack(t_stack *a)
 {
+	t_node *cur;
 	size_t count;
 
 	count = 0;
-	while (a)
+	cur = a->top;
+	while (cur)
 	{
 		count++;
-		a = a->next;
+		cur = cur->next;
 	}
+	a->size = count;
 	return (count);
 }
 
-int is_sorted(t_stack *a)
+int is_sorted(t_node *a)
 {
-	t_stack *next;
+	t_node *next;
 
 	if(!a || !a->next)
 		return (1);
@@ -60,9 +63,9 @@ int is_sorted(t_stack *a)
 	return (1);
 }
 
-void free_stack(t_stack *a)
+void free_stack(t_node *a)
 {
-	t_stack *tmp;
+	t_node *tmp;
 
 	while (a)
 	{

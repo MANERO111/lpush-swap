@@ -18,33 +18,42 @@ void init_info(t_info *i)
 	i->sb = 0;
 	i->ss = 0;
 }
+void init(t_stack *a)
+{
+	a->top = NULL;
+	a->bottom = NULL;
+	a->size = 0;
+}
 
 int main(int ac, char **av)
 {
-	t_stack *a;
-	t_stack *s;
+	t_stack a;
+	t_node *s;
 	t_info info;
 
 	if(ac == 1)
 		return (0);
-	a = NULL;
-	//b = NULL;
+	
+	init(&a);
 	init_info(&info);
 	parser(av, ac, &a, &info);
-	ft_index_stack(a);
-	info.disorder = ft_disorder(a);
+	ft_index_stack(a.top);
+	info.disorder = ft_disorder(a.top);
 	printf("%.2f\n",info.disorder);
 	printf("strategy %d\n", info.strategie);
-	if(is_sorted(a))
+	if(is_sorted(a.top))
 	{
 		printf("the stack already sorted");
-		free_stack(a);
+		free_stack(a.top);
+		init(&a);
 		return (0);
 	}
-	s = a;
+	//swap(&a);
+	s = a.top;
 	while (s)
 	{
 		printf("index : %d | value %d\n",s->index,s->value);
 		s = s->next;
 	}
+	free_stack(a.top);
 }
