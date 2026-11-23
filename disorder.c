@@ -24,7 +24,7 @@ void	ft_index_stack(t_stack *a)
 double ft_disorder(t_stack *a)
 {
 	t_stack *cur;
-	int mistakes;
+	long mistakes;
 	long total_pairs;
 	
 	mistakes = 0;
@@ -42,5 +42,7 @@ double ft_disorder(t_stack *a)
 		}
 		a = a->next;
 	}
+	if (total_pairs == 0)
+		return (0.0);
 	return ((double)mistakes / (double)total_pairs);
 }

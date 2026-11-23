@@ -5,6 +5,7 @@ void init_info(t_info *i)
 {
 	i->disorder = 0;
 	i->strategie = STRAT_ADAPTIVE;
+	i->bench = 0;
 	i->pa = 0;
 	i->pb = 0;
 	i->ra = 0;
@@ -28,7 +29,7 @@ int main(int ac, char **av)
 		return (0);
 	a = NULL;
 	//b = NULL;
-	//init_info(&info);
+	init_info(&info);
 	parser(av, ac, &a, &info);
 	ft_index_stack(a);
 	info.disorder = ft_disorder(a);

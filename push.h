@@ -21,6 +21,7 @@ typedef struct s_info
 {
 	int	strategie;
 	double disorder;
+	int bench ;
 	int	sa;
 	int	sb;
 	int	ss;

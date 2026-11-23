@@ -48,6 +48,8 @@ int is_sorted(t_stack *a)
 {
 	t_stack *next;
 
+	if(!a || !a->next)
+		return (1);
 	while (a->next)
 	{
 		next = a->next;
