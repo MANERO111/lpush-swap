@@ -59,7 +59,19 @@ void	free_split(char **str);
 void free_stack(t_node *a);
 int		ft_strcmp(const char *s1, const char *s2);
 
+void sa(t_stack *a, t_info *info);
+void sb(t_stack *b, t_info *info);
+void ss(t_stack *a, t_stack *b, t_info *info);
 
+void pa(t_stack *a, t_stack *b, t_info *info);
+void pb(t_stack *a, t_stack *b, t_info *info);
 
-int swap(t_stack *stack);
+void ra(t_stack *a, t_info *info);
+void rb(t_stack *b, t_info *info);
+void rr(t_stack *a, t_stack *b, t_info *info);
+
+void rra(t_stack *a, t_info *info);
+void rrb(t_stack *b, t_info *info);
+void rrr(t_stack *a, t_stack *b, t_info *info);
+
 #endif

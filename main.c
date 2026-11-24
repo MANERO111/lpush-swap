@@ -28,6 +28,7 @@ void init(t_stack *a)
 int main(int ac, char **av)
 {
 	t_stack a;
+	t_stack b;
 	t_node *s;
 	t_info info;
 
@@ -35,6 +36,7 @@ int main(int ac, char **av)
 		return (0);
 	
 	init(&a);
+	init(&b);
 	init_info(&info);
 	parser(av, ac, &a, &info);
 	ft_index_stack(a.top);
@@ -48,12 +50,20 @@ int main(int ac, char **av)
 		init(&a);
 		return (0);
 	}
-	//swap(&a);
+	rr(&a,&b,&info);
 	s = a.top;
 	while (s)
 	{
 		printf("index : %d | value %d\n",s->index,s->value);
 		s = s->next;
 	}
+	s= b.top;
+	printf("stack b\n");
+	while (s)
+	{
+		printf("index : %d | value %d\n",s->index,s->value);
+		s = s->next;
+	}
+	free_stack(b.top);
 	free_stack(a.top);
 }
