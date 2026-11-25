@@ -58,6 +58,7 @@ size_t	size_of_stack(t_stack *a);
 void	free_split(char **str);
 void free_stack(t_node *a);
 int		ft_strcmp(const char *s1, const char *s2);
+void ft_radix(t_stack *a, t_stack *b, t_info *info);
 
 void sa(t_stack *a, t_info *info);
 void sb(t_stack *b, t_info *info);
@@ -74,4 +75,5 @@ void rra(t_stack *a, t_info *info);
 void rrb(t_stack *b, t_info *info);
 void rrr(t_stack *a, t_stack *b, t_info *info);
 
+void simple(t_stack *a, t_stack *b, t_info *info);
 #endif

@@ -17,6 +17,7 @@ void init_info(t_info *i)
 	i->sa = 0;
 	i->sb = 0;
 	i->ss = 0;
+	i->total = 0;
 }
 void init(t_stack *a)
 {
@@ -41,8 +42,8 @@ int main(int ac, char **av)
 	parser(av, ac, &a, &info);
 	ft_index_stack(a.top);
 	info.disorder = ft_disorder(a.top);
-	printf("%.2f\n",info.disorder);
-	printf("strategy %d\n", info.strategie);
+	//printf("%.2f\n",info.disorder);
+	//printf("strategy %d\n", info.strategie);
 	if(is_sorted(a.top))
 	{
 		printf("the stack already sorted");
@@ -50,7 +51,7 @@ int main(int ac, char **av)
 		init(&a);
 		return (0);
 	}
-	rr(&a,&b,&info);
+	ft_radix(&a,&b,&info);
 	s = a.top;
 	while (s)
 	{
@@ -64,6 +65,7 @@ int main(int ac, char **av)
 		printf("index : %d | value %d\n",s->index,s->value);
 		s = s->next;
 	}
+	printf("%d\n",info.total);
 	free_stack(b.top);
 	free_stack(a.top);
 }
