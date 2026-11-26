@@ -75,5 +75,6 @@ void rra(t_stack *a, t_info *info);
 void rrb(t_stack *b, t_info *info);
 void rrr(t_stack *a, t_stack *b, t_info *info);
 
+void    ft_chunk_sort(t_stack *a, t_stack *b, t_info *info);
 void simple(t_stack *a, t_stack *b, t_info *info);
 #endif

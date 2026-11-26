@@ -51,21 +51,32 @@ int main(int ac, char **av)
 		init(&a);
 		return (0);
 	}
-	ft_radix(&a,&b,&info);
-	s = a.top;
-	while (s)
-	{
-		printf("index : %d | value %d\n",s->index,s->value);
-		s = s->next;
-	}
-	s= b.top;
-	printf("stack b\n");
-	while (s)
-	{
-		printf("index : %d | value %d\n",s->index,s->value);
-		s = s->next;
-	}
-	printf("%d\n",info.total);
+	ft_chunk_sort(&a,&b,&info);
+	//s = a.top;
+	//while (s)
+	//{
+	//	printf("index : %d | value %d\n",s->index,s->value);
+	//	s = s->next;
+	//}
+	//s= b.top;
+	//printf("stack b\n");
+	//while (s)
+	//{
+	//	printf("index : %d | value %d\n",s->index,s->value);
+	//	s = s->next;
+	//}
+	printf("pa %d\n",info.pa);
+	printf("pb %d\n",info.pb);
+	printf("ra %d\n",info.ra);
+	printf("rb %d\n",info.rb);
+	printf("rr %d\n",info.rr);
+	printf("rra %d\n",info.rra);
+	printf("rrb %d\n",info.rrb);
+	printf("rrr %d\n",info.rrr);
+	printf("sa %d\n",info.sa);
+	printf("sb %d\n",info.sb);
+	printf("ss %d\n",info.ss);
+	printf("total %d\n",info.total);
 	free_stack(b.top);
 	free_stack(a.top);
 }
