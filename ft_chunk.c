@@ -2,12 +2,11 @@
 
 int count_chunk_size(int n)
 {
-    int size;
-
-    size = 1;
-    while (size * size < n)
-        size++;
-    return (25);
+	if (n <= 100)
+		return (15);
+	if (n <= 500)
+		return (30);
+	return (45);
 }
 
 int find_max_pos(t_stack *b)
@@ -38,53 +37,42 @@ int find_max_pos(t_stack *b)
 
 void    ft_chunk_sort(t_stack *a, t_stack *b, t_info *info)
 {
-	int chunk_start ;
-	int chunk_midpoint;
-	int chunk_end;
 	int chunk_size;
-	int scan_count;
 	int pos;
 	int i;
 
-	chunk_start = 0;
 	chunk_size = count_chunk_size(a->size);
-	while (a->size > 0)
+	i = 0;
+	while (a->top)
 	{
-		i = 0;
-		scan_count = a->size;
-		chunk_end = (chunk_start + chunk_size - 1);
-		chunk_midpoint = (chunk_end + 1) - (chunk_size / 2);
-		while (i < scan_count)
+		if (a->top->index <= i)
 		{
-			if(a->top->index >= chunk_start && a->top->index <= chunk_end)
-			{
-				pb(a, b, info);
-				if(b->top->index < chunk_midpoint)
-					rb(b,info);
-			}
-			else
-				ra(a, info);
+			pb(a, b, info);
+			rb(b, info);
 			i++;
 		}
-		chunk_start += chunk_size;
+		else if (a->top->index <= i + chunk_size)
+		{
+			pb(a, b, info);
+			i++;
+		}
+		else
+			ra(a, info);
 	}
 	while (b->top)
 	{
-		i = 0;
 		pos = find_max_pos(b);
-
-		if(pos <= b->size / 2)
-			while (i < pos)
-			{
+		if (pos <= b->size / 2)
+		{
+			while (pos-- > 0)
 				rb(b, info);
-				i++;
-			}
+		}
 		else
-			while (i < b->size - pos)
-			{
+		{
+			pos = b->size - pos;
+			while (pos-- > 0)
 				rrb(b, info);
-				i++;
-			}
+		}
 		pa(a, b, info);
 	}
 }
